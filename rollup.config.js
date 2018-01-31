@@ -11,7 +11,7 @@ export default [
   {
     input: 'src/index.js',
     output: {
-      // name: 'dist/index.js',
+      name: 'loadPolyfill',
       file: pkg.browser,
       format: 'umd',
     },
