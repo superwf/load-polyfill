@@ -6,7 +6,8 @@
   "module": "dist/load-polyfill.es",
   "scripts": {
     "test": "jest",
-    "build": "NODE_ENV=production rollup -c --treeshake"
+    "build": "NODE_ENV=production rollup -c --treeshake",
+    "prepublish": "npm run build"
   },
   "keywords": [],
   "author": "",
@@ -30,5 +31,5 @@
     "webpack": "^3.10.0"
   },
   "dependencies": {},
-  "browser": "load-polyfill.js"
+  "browser": "dist/load-polyfill.umd.js"
 }

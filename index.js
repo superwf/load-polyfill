@@ -1,1 +1,0 @@
-"use strict";const isPromise=o=>o&&"then"in o;function loadPolyfill(o){const l=[];for(let i in o){const s=o[i];if(("function"==typeof s[0]?s[0]():s[0])&&"function"==typeof s[1]){const o=s[1]();isPromise(o)?l.push(o):o||l.push(Promise.reject(`polyfills[${i}] polyfill load fail`))}}return Promise.all(l)}module.exports=loadPolyfill;
