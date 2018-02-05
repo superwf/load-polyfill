@@ -1,9 +1,10 @@
 {
   "name": "load-polyfill",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "main": "dist/load-polyfill.js",
-  "module": "dist/load-polyfill.es",
+  "umd:main": "dist/load-polyfill.umd.js",
+  "module": "dist/load-polyfill.module.js",
   "scripts": {
     "test": "jest",
     "build": "NODE_ENV=production rollup -c --treeshake",
@@ -30,6 +31,5 @@
     "rollup-plugin-uglify": "^3.0.0",
     "webpack": "^3.10.0"
   },
-  "dependencies": {},
-  "browser": "dist/load-polyfill.umd.js"
+  "dependencies": {}
 }

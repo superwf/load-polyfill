@@ -12,7 +12,7 @@ export default [
     input: 'src/index.js',
     output: {
       name: 'loadPolyfill',
-      file: pkg.browser,
+      file: pkg['umd:main'],
       format: 'umd',
     },
     plugins: [
