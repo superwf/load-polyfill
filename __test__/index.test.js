@@ -35,4 +35,13 @@ describe('load and return promise', () => {
       expect(spy).toHaveBeenCalled()
     })
   })
+
+  it('condition is native Object', done => {
+    const spy = jest.fn()
+    loadPolyfill([[Map, spy]])
+    setTimeout(() => {
+      expect(spy).not.toHaveBeenCalled()
+      done()
+    })
+  })
 })

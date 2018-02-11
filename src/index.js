@@ -22,7 +22,10 @@ function loadPolyfill(polyfills) {
   for (let o in polyfills) {
     const polyfill = polyfills[o]
     const condition =
-      typeof polyfill[0] === 'function' ? polyfill[0]() : polyfill[0]
+      typeof polyfill[0] === 'function' &&
+      polyfill[0].toString().indexOf('native code') === -1
+        ? polyfill[0]()
+        : polyfill[0]
     if (!condition) {
       if (typeof polyfill[1] === 'function') {
         const polyfillResult = polyfill[1]()
