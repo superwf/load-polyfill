@@ -22,11 +22,8 @@ function loadPolyfill(polyfills) {
   for (let o in polyfills) {
     const polyfill = polyfills[o]
     const condition =
-      typeof polyfill[0] === 'function' &&
-      polyfill[0].toString().indexOf('native code') === -1
-        ? polyfill[0]()
-        : polyfill[0]
-    if (!condition) {
+      typeof polyfill[0] === 'function' ? polyfill[0]() : polyfill[0]
+    if (condition === false) {
       if (typeof polyfill[1] === 'function') {
         const polyfillResult = polyfill[1]()
         if (isPromise(polyfillResult)) {
@@ -35,6 +32,10 @@ function loadPolyfill(polyfills) {
           promises.push(Promise.reject(`polyfills[${o}] polyfill load fail`))
         }
       }
+    } else if (typeof condition !== 'boolean') {
+      throw new Error(
+        'condition must be boolean or function that return boolean',
+      )
     }
   }
 

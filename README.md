@@ -11,9 +11,9 @@ import 'es6-promise/auto'
 
 loadPolyfill accept an array of two dimesions
 
-in each one item[0] could be object or function, when function it should return bool in sync code
+in each one item[0] should be boolean or function, when function it should return bool in sync code
 
-in each one item[1] could be string or function
+in each one item[1] could be string or function, when function it should return promise
 
 it return promise, call your main code in 'then' method
 
@@ -25,15 +25,15 @@ import loadPolyfill from 'load-polyfill'
 
 // here use dynimic import and webpack code spliting feature.
 loadPolyfill([
-  [Array.isArray, 'core-js/fn/array/is-array'],
+  ['isArray' in Array, 'core-js/fn/array/is-array'],
   // when the second is fn, it must return promise
-  [Array.isArray, () => import('lodash/isArray').then(module => Array.isArray = module)],
-  [Array.from, 'core-js/fn/array/from'],
-  [() => Array.prototype.find, 'core-js/fn/array/find'], // will call dynimic import('core-js/fn/array/find')
-  [() => Array.prototype.find, () => import('core-js/fn/array/find')], // or run your own logic
+  ['isArray' in Array, () => import('lodash/isArray').then(module => Array.isArray = module)],
+  ['from' in Array, 'core-js/fn/array/from'],
+  [() => 'find' in Array.prototype, 'core-js/fn/array/find'], // will call dynimic import('core-js/fn/array/find')
+  [() => 'find' in Array.prototype, () => import('core-js/fn/array/find')], // or run your own logic
   [() => {
     // some code to test env does not have Map
-    return window.Map
+    return 'Map' in global
   }, () => import('es6-map/polyfill')],
 ]).then(() => {
   // load your main code here
